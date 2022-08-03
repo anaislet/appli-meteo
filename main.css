@@ -1,0 +1,141 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: 'IBM Plex Serif', serif;
+	font-size: 16px;
+}
+
+html
+{
+	background-color: #F9F9F9;
+}
+
+body
+{
+	width: 1000px;
+	margin: 0 auto;
+}
+
+div#affichage
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto;
+}
+
+div#cadre
+{
+    height: 640px;
+    width: 340px;
+    margin: 0 30px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+/* header */
+
+header
+{
+text-align: center;
+padding: 30px;
+}
+
+h1, input
+{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+input
+{
+    outline: none;
+    border: none;
+    border-bottom: 2px black solid;
+    background-color: transparent;
+    text-align: center;
+}
+
+/* section meteoCourante */
+
+section#meteoCourante
+{
+    visibility: hidden;
+}
+
+/* div currentWeather */
+
+div#currentWeather
+{
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    display: flex ;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div#currentWeather p#recherche
+{
+padding-top: 30px;
+}
+
+div#currentWeather p#icone img
+{
+    height: 180px;
+    width: 180px;
+}
+
+div#currentWeather img
+{
+    height: 30px;
+    width: 30px;
+}
+
+div#currentWeather p span#localisation
+{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 35px;
+}
+
+div#currentWeather div  p
+{
+    text-align: center;
+}
+
+div#currentWeather div  p span#weather
+{
+    font-family: 'Josefin Slab', serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+div#currentWeather  p span#temperature
+{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+div#currentWeather p#humidite, span#humidity, p#vent, span#wind
+{
+    font-family: 'Josefin Slab', serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* section previsions */
+
+section#previsions
+{
+    visibility: hidden;
+    background-color: white;
+    height: 700px;
+    width: 400px;
+    margin: 0 30px;
+    border-radius: 15px;
+}
