@@ -64,7 +64,7 @@ function displayWeather(lat, long){
                 if(heure[0] == 15){
                     // Traduction de l'ID en météo en français
                     const weatherFr = traduireIdEnMeteo(prevision.weather[0].id);
-                    creerDiv(prevision.dt_txt, weatherFr[0], prevision.main.temp, prevision.main.humidity, prevision.wind.speed);
+                    creerDiv(date[0], weatherFr[0], weatherFr[1], weatherFr[2], prevision.main.temp, prevision.main.humidity, prevision.wind.speed);
                 }
             }
         })
@@ -216,28 +216,89 @@ function traduireIdEnMeteo(id){
 }
 
 // Création d'une div et de cinq p pour l'affichage d'une prévision
-function creerDiv(date, meteo, temperature, humidite, vent){
+function creerDiv(date, meteo, icone, color, temperature, humidite, vent){
     var newDiv = document.createElement("div");
+    newDiv.classList.add("jour");
     document.getElementById("previsions").appendChild(newDiv);
+    newDiv.style.backgroundColor = color;
+    // creation de la div transparente
+    var divTransp = document.createElement("div");
+    divTransp.classList.add("transparent");
+    newDiv.appendChild(divTransp); 
+    // création d'une div contenant date et météo
+    var divGauche = document.createElement("div");
+    divTransp.appendChild(divGauche);
     // création du paragraphe date
     var pDate = document.createElement("p");
-    newDiv.appendChild(pDate);
-    pDate.innerHTML = date;
+    divGauche.appendChild(pDate);
+    pDate.innerHTML = traduireDate(date);
+    // creation de l'image icone
+    var pIcone = document.createElement("img");
+    pIcone.classList.add("petiteIcone");
+    divGauche.appendChild(pIcone);
+    pIcone.src = icone + ".svg";
     // création du paragraphe meteo
     var pMeteo = document.createElement("p");
-    newDiv.appendChild(pMeteo);
-    pMeteo.innerHTML = meteo;
+    divGauche.appendChild(pMeteo);
+    pMeteo.innerHTML = meteo
+    // création d'une div contenant température, humidité et vitesse du vent
+    var divDroite = document.createElement("div");
+    divTransp.appendChild(divDroite);
     // création du paragraphe température
     var pTemperature = document.createElement("p");
-    newDiv.appendChild(pTemperature);
-    pTemperature.innerHTML = temperature;
+    pTemperature.classList.add("temp");
+    divDroite.appendChild(pTemperature);
+    pTemperature.innerHTML = Math.round(temperature) + "°C";
     // création du paragraphe humidité
     var pHumidite = document.createElement("p");
-    newDiv.appendChild(pHumidite);
-    pHumidite.innerHTML = humidite;
+    divDroite.appendChild(pHumidite);
+    pHumidite.innerHTML = "Humidité : " + humidite + "%";
     // création du paragraphe vitesse du vent
     var pVent = document.createElement("p");
-    newDiv.appendChild(pVent);
-    pVent.innerHTML = vent;
+    divDroite.appendChild(pVent);
+    pVent.innerHTML = "Vent : " + Math.round((vent)*3.6) + " km/h";
     document.getElementById("previsions").style.visibility = "visible";
+}
+
+// transforme une date au format 2022-08-05 en 05 août
+function traduireDate (dateUS){
+    const dateFr = dateUS.split("-");
+    let mois = dateFr[1];
+    if (mois == "01"){
+        mois = "janvier";
+    }
+    else if (mois == "02"){
+        mois = "février";
+    }
+    else if (mois == "03"){
+        mois = "mars";
+    }
+    else if (mois == "04"){
+        mois = "avril";
+    }
+    else if (mois == "05"){
+        mois = "mai";
+    }
+    else if (mois == "06"){
+        mois = "juin";
+    }
+    else if (mois == "07"){
+        mois = "juillet";
+    }
+    else if (mois == "08"){
+        mois = "août";
+    }
+    else if (mois == "09"){
+        mois = "septembre";
+    }
+    else if (mois == "10"){
+        mois = "octobre";
+    }
+    else if (mois == "11"){
+        mois = "novembre";
+    }
+    else if (mois == "12"){
+        mois = "décembre";
+    }
+    return dateFr[2] + " " + mois;
 }

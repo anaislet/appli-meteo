@@ -8,7 +8,7 @@
 
 html
 {
-	background-color: #F9F9F9;
+	background-color: white;
 }
 
 body
@@ -27,7 +27,7 @@ div#affichage
 
 div#cadre
 {
-    height: 640px;
+    height: 656px;
     width: 340px;
     margin: 0 30px;
     padding: 30px;
@@ -133,9 +133,58 @@ div#currentWeather p#humidite, span#humidity, p#vent, span#wind
 section#previsions
 {
     visibility: hidden;
-    background-color: white;
+    background-color: #f1f3f5;
     height: 700px;
     width: 400px;
     margin: 0 30px;
+    padding: 8px 0;
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+section#previsions div.jour
+{
+    width: 320px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+section#previsions div.jour div.transparent
+{
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+section#previsions div.jour div.transparent div
+{
+    padding: 3px 0;
+}
+
+section#previsions div.jour div.transparent p
+{
+    font-family: 'Josefin Slab', serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+section#previsions div.jour div.transparent p.temp
+{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+section#previsions div.jour div.transparent div img.petiteIcone
+{
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
