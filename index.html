@@ -6,36 +6,41 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="main.css">
         <title>Météo</title>
     </head>
     <body>
-        <header>
-            <h1>Quel temps fait-il à <input type="text" id="ville" name="name" required autofocus/> ?</h1>  
-        </header>
-        <div id="affichage">
-            <section id="meteoCourante">
-                <div id="cadre">
-                    <!--currentWeather-->
-                    <div id="currentWeather">
-                        <p id = "recherche">
-                            <img src="location-point.svg" alt="location"/>
-                            <span id="localisation"></span>
-                        </p>
-                        <div>
-                            <p id ="icone"></p>
-                            <p><span id="weather"></span></p>
+        <div id="carte"></div>
+        <div id="contenu">
+            <header>
+                <h1>Quel temps fait-il à <input type="text" id="ville" name="name" required autofocus/> ?</h1>  
+            </header>
+            <div id="affichage">
+                <section id="meteoCourante">
+                    <div id="cadre">
+                        <!--currentWeather-->
+                        <div id="currentWeather">
+                            <p id = "recherche">
+                                <img src="location-point.svg" alt="location"/>
+                                <span id="localisation"></span>
+                            </p>
+                            <div>
+                                <p id ="icone"></p>
+                                <p><span id="weather"></span></p>
+                            </div>
+                            <p><span id="temperature"></span></p>
+                            <p id ="humidite">Humidité : <span id="humidity"></span></p>
+                            <p id = "vent">Vent : <span id="wind"></span></p>
                         </div>
-                        <p><span id="temperature"></span></p>
-                        <p id ="humidite">Humidité : <span id="humidity"></span></p>
-                        <p id = "vent">Vent : <span id="wind"></span></p>
+                        <!--currentWeather-->
                     </div>
-                    <!--currentWeather-->
-                </div>
-            </section>
-            <section id="previsions">            
-            </section>
+                </section>
+                <section id="previsions">            
+                </section>
+            </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
         <script type="text/javascript" src="main.js"></script>
     </body>
 </html>

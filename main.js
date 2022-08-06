@@ -4,6 +4,23 @@ let key = "c1d69414b1df0de21dcfcfaac7ab4a8c";
 // Evénement lié à l'input de la ville recherchée
 document.getElementById("ville").addEventListener("change", geocodeAndDisplayWeather);
 
+
+var carte = new ol.Map({
+    target: 'carte',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM(),
+        opacity: 0.7
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([2, 48]),
+      zoom: 7
+    })
+});
+
+
+
 function geocodeAndDisplayWeather(e){
     const ville = e.target.value;
     // Geocodage : récupération de la latitude et de la longitude
@@ -46,11 +63,13 @@ function displayWeather(lat, long){
             document.getElementById("wind").innerHTML = Math.round((value.wind.speed)*3.6) + " km/h";
             document.getElementById("cadre").style.backgroundColor = weatherFr[2];
             document.getElementById("meteoCourante").style.visibility = "visible";
+            // Modification du centre de la carte
+            carte.getView().setCenter(ol.proj.fromLonLat([long, lat]));
         })
-        // Appel de l'API pour la météo à 5 jours
-        // Effacer les données précédentes
-        document.getElementById("previsions").innerHTML = "";
-        fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + key + "&units=metric")
+    // Appel de l'API pour la météo à 5 jours
+    // Effacer les données précédentes
+    document.getElementById("previsions").innerHTML = "";
+    fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=" + key + "&units=metric")
         .then(function(res) {
             if (res.ok) {
                 return res.json();
