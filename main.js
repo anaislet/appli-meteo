@@ -7,7 +7,7 @@ document.getElementById("ville").addEventListener("change", geocodeAndDisplayWea
 function geocodeAndDisplayWeather(e){
     const ville = e.target.value;
     // Geocodage : récupération de la latitude et de la longitude
-    fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + ville + "&limit=5&appid=" + key)
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + ville + "&limit=5&appid=" + key)
     .then(function(res) {
         if (res.ok) {
             return res.json();
