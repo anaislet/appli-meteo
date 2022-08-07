@@ -15,11 +15,9 @@ var carte = new ol.Map({
     ],
     view: new ol.View({
       center: ol.proj.fromLonLat([2, 48]),
-      zoom: 7
+      zoom: 4
     })
 });
-
-
 
 function geocodeAndDisplayWeather(e){
     const ville = e.target.value;
@@ -64,7 +62,10 @@ function displayWeather(lat, long){
             document.getElementById("cadre").style.backgroundColor = weatherFr[2];
             document.getElementById("meteoCourante").style.visibility = "visible";
             // Modification du centre de la carte
-            carte.getView().setCenter(ol.proj.fromLonLat([long, lat]));
+            //carte.getView().setCenter(ol.proj.fromLonLat([long, lat]));
+            //carte.getView().animate({center: ol.proj.fromLonLat([long, lat]), duration: 4000,})
+            flyTo(ol.proj.fromLonLat([long, lat]), function(){});
+            // To Do : https://openlayers.org/en/latest/examples/animation.html
         })
     // Appel de l'API pour la météo à 5 jours
     // Effacer les données précédentes
@@ -115,7 +116,7 @@ function traduireIdEnMeteo(id){
         case 230: //thunderstorm with light drizzle
         case 231: //thunderstorm with drizzle
         case 232: //thunderstorm with heavy drizzle
-            weather = "Orage avec bruine";
+            weatherFr = "Orage avec bruine";
             icone = "orage";
             color = "#787A91";
             break;
@@ -124,7 +125,7 @@ function traduireIdEnMeteo(id){
         case 302: //heavy intensity drizzle
         case 310: //light intensity drizzle rain
         case 311: //drizzle rain
-            weather = "Bruine";
+            weatherFr = "Bruine";
             icone = "bruine";
             color = "#719FB0";
             break;
@@ -132,7 +133,7 @@ function traduireIdEnMeteo(id){
         case 313: //shower rain and drizzle
         case 314: //heavy shower rain and drizzle
         case 321: //shower drizzle
-            weather = "Bruine de forte intensité";
+            weatherFr = "Bruine de forte intensité";
             icone = "bruine";
             color = "#719FB0";
             break;
@@ -321,3 +322,40 @@ function traduireDate (dateUS){
     }
     return dateFr[2] + " " + mois;
 }
+
+// Transition en "fly to"
+function flyTo(location, done) {
+    const duration = 3000;
+    const zoom = carte.getView().getZoom();
+    let parts = 2;
+    let called = false;
+    function callback(complete) {
+      --parts;
+      if (called) {
+        return;
+      }
+      if (parts === 0 || !complete) {
+        called = true;
+        done(complete);
+      }
+    }
+    carte.getView().animate(
+      {
+        center: location,
+        duration: duration,
+      },
+      callback
+    );
+    carte.getView().animate(
+      {
+        zoom: zoom - 1,
+        duration: duration / 2,
+      },
+      {
+        zoom: 7,
+        duration: duration / 2,
+      },
+      callback
+    );
+  }
+  
