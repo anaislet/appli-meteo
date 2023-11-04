@@ -10,7 +10,7 @@ sudo docker run -p 3008:80 meteo
 
 ## Consulter le site depuis le navigateur
 
-http://localhost:3007/
+http://localhost:3008/
 
 ## Commandes utiles
 
